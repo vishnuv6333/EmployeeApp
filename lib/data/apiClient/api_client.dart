@@ -118,9 +118,11 @@ class ApiClient {
         request.files.add(multipartFile);
       });
     }
-
+  
     final response = await request.send();
+    print(response.statusCode);
     var httpResponse = await res.Response.fromStream(response);
+    print(httpResponse.body);
     final jsonresposne = json.decode(httpResponse.body);
     Logger.log(jsonresposne);
     return jsonresposne;

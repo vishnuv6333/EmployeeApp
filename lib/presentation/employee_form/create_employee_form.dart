@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:employeeapp/core/utils/snackbar_utils.dart';
 import 'package:employeeapp/core/utils/validation_functions.dart';
 import 'package:employeeapp/presentation/employee_form/controller/create_employee_controller.dart';
 import 'package:employeeapp/theme/button_style.dart';
@@ -167,13 +168,14 @@ class CreateEmployeeForm extends GetWidget<AddEmployeeController> {
                         defaultSpacerVerticalMedium,
                         defaultSpacerVerticalMedium,
                         Obx(
-                          ()=> CustomElevatedButton(
+                          () => CustomElevatedButton(
                               isDisabled: false,
                               height: 50,
                               text: controller.isloading.value
                                   ? "Please wait.."
                                   : "Add Employee",
-                              margin: const EdgeInsets.symmetric(horizontal: 30),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               buttonStyle: CustomButtonStyles.fillBlue,
                               buttonTextStyle:
                                   CustomTextStyles.bodyMediumBluegray40,
@@ -192,7 +194,11 @@ class CreateEmployeeForm extends GetWidget<AddEmployeeController> {
                                   : null,
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  controller.addNewEmployee();
+                                  if (controller.imagepath.value != "") {
+                                    controller.addNewEmployee();
+                                  } else {
+                                    showMessage("Select a Image");
+                                  }
                                 }
                               }),
                         ),
